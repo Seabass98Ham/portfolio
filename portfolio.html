@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sébastien H. — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --ink: #1a1814;
+      --muted: #8c8880;
+      --accent: #c8a96e;
+      --line: #ddd9d3;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --mono: 'DM Sans', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      line-height: 1.7;
+    }
+
+
+    /* ── MAIN PORTFOLIO PAGE ── */
+    #page-main {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      padding: 3rem 4rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid var(--line);
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .name {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      line-height: 1;
+      text-decoration: none;
+      color: black;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--ink); }
+
+    /* Hero tagline */
+    .tagline {
+      padding: 4rem 4rem 3rem;
+      max-width: 640px;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+
+    .tagline p {
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      font-weight: 300;
+      color: black;
+      line-height: 1.6;
+    }
+
+    /* Projects grid */
+    .projects-label {
+      padding: 0 4rem 1rem;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+
+    .grid {
+      padding: 0 4rem 6rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); /* Ask ChatGTP about this ~ */
+      gap: 4px;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+
+    .project-card {
+      position: relative;
+      background: var(--ink);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.5s ease, transform 0.6s ease;
+      opacity: 1;
+    }
+
+    .project-card:hover img {
+      opacity: 0.3;
+      transform: scale(1.04);
+    }
+
+    .card-info {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .project-card:hover .card-info { opacity: 1; }
+
+    .card-title {
+      font-family: var(--serif);
+      font-size: 1.7rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--bg);
+      line-height: 1.1;
+    }
+
+    .card-meta {
+      color: var(--accent);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+    }
+
+    .card-arrow {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      color: var(--bg);
+      font-size: 1.4rem;
+      opacity: 0;
+      transform: translate(-4px, 4px);
+      transition: opacity 0.4s, transform 0.4s;
+    }
+    .project-card:hover .card-arrow {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: auto;
+      padding: 2rem 4rem;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--ink); }
+
+    /* ── PROJECT DETAIL PAGE ── */
+    #page-project {
+      display: none;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    .project-header {
+      padding: 2.5rem 4rem;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .back-btn {
+      background: none;
+      border: none;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s;
+      padding: 0;
+    }
+    .back-btn:hover { color: var(--ink); }
+
+    .project-header-title {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    .project-body {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 4rem;
+      padding: 4rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .project-hero {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      background: var(--line);
+      display: block;
+      /* placeholder gradient if no image */
+      background-image: linear-gradient(135deg, var(--line) 0%, #e8e4de 100%);
+    }
+
+    .project-images {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .project-images img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      background: var(--line);
+      display: block;
+    }
+
+    .project-images img:first-child {
+      aspect-ratio: 4/3;
+    }
+
+    .project-sidebar {
+      padding-top: 0.5rem;
+    }
+
+    .sidebar-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .sidebar-label {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .sidebar-value {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 300;
+    }
+
+    .project-description {
+      margin-top: 2.5rem;
+      grid-column: 1;
+    }
+
+    .project-description p {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: #4a4740;
+      line-height: 1.8;
+      max-width: 620px;
+    }
+
+    .project-description p + p {
+      margin-top: 1.2em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 720px) {
+      header, .tagline, .projects-label, .grid, footer,
+      .project-header, .project-body { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .project-body { grid-template-columns: 1fr; }
+      nav { gap: 1rem; }
+    }
+
+    .active {
+      color: black;
+    }
+
+    #loader-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: #1a1a2e; /* 🎨 Change this to your color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+  }
+
+  #loader-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* ── CUSTOM MODAL ── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 24, 20, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 9999;
+  }
+
+  .modal-overlay.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal-box {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    padding: 3rem;
+    max-width: 400px;
+    width: 90%;
+    transform: translateY(16px);
+    transition: transform 0.35s ease, opacity 0.35s ease;
+    opacity: 0;
+  }
+
+  .modal-overlay.visible .modal-box {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .modal-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .modal-title {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .modal-text {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 300;
+    color: #4a4740;
+    line-height: 1.75;
+    margin-bottom: 2rem;
+  }
+
+  .modal-btn {
+    background: none;
+    border: 1px solid var(--ink);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    padding: 0.75rem 2rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .modal-btn:hover {
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<!-- ══════════════════════════════════════
+     MAIN PORTFOLIO PAGE
+══════════════════════════════════════ -->
+<div id="page-main">
+
+  <header>
+    <a class="name" href="portfolio.html">Sébastien H.</a><!-- ← change this -->
+    <nav>
+      <a href="https://www.linkedin.com/in/s%C3%A9bastien-h-a75829300/">LinkedIn</a><!-- ← go to contact page -->
+    </nav>
+  </header>
+
+  <div class="tagline">
+    <p>
+      I'm Seb, an MSc student, designer and digital storyteller based in Montreal, Canada. 
+
+    </p>
+  </div>
+
+  <div class="projects-label">Selected Work</div>
+
+  <div class="grid">
+
+    <!-- ══ PROJECT CARD — duplicate this block for each project ══ -->
+      <div class="project-card" onclick="openProject()">
+        <!-- Replace src with your image path, e.g. src="images/proj1.jpg" -->
+        <img src="/Users/sebhamdy/Downloads/tp3-mockup-main.jpg" alt="Project 1" >
+        <div class="card-info">
+          <div class="card-title">TP3 • HEC Montréal</div><!-- ← change -->
+          <div class="card-meta">System Design • Presentation • 2026</div><!-- ← change -->
+        </div>
+      </div>
+
+    <div class="project-card" onclick="openProject()">
+      <img src="/Users/sebhamdy/Downloads/lfd-web-mockup-main.jpg" alt="Project 2" >
+      <div class="card-info">
+        <div class="card-title">Les Fruits Défendus</div>
+        <div class="card-meta">Mobile Design • UX Design • Prototyping • 2026</div>
+      </div>
+    </div>
+
+    <div class="project-card" onclick="openProject()">
+      <img src="/Users/sebhamdy/Downloads/mcgill-mockup-main.jpg" alt="Project 3" >
+      <div class="card-info">
+        <div class="card-title">Francofête 2025 • McGill University</div>
+        <div class="card-meta">Social Media Design • Instagram • 2025</div>
+      </div>
+    </div>
+
+    <div class="project-card" onclick="openProject()">
+      <img src="/Users/sebhamdy/Downloads/kotn-mockup-main.jpg" alt="Project 4">
+      <div class="card-info">
+        <div class="card-title">Kotn • HEC Montréal</div>
+        <div class="card-meta">Presentation Design • 2026</div>
+      </div>
+    </div>
+
+    <div class="project-card" onclick="openProject()">
+      <img src="/Users/sebhamdy/Downloads/chargegub-mockup-main.jpg" alt="Project 5">
+      <div class="card-info">
+        <div class="card-title">ChargeHub • HEC Montréal</div>
+        <div class="card-meta">Presentation Design • 2026</div>
+      </div>
+    </div>
+
+    <div class="project-card" onclick="openProject()">
+      <img src="/Users/sebhamdy/Downloads/lfd-mockup-main.jpg" alt="Project 6">
+      <div class="card-info">
+        <div class="card-title">Les Fruits Défendus</div>
+        <div class="card-meta">Social Media Design • Instagram • 2025</div>
+      </div>
+    </div>
+
+    <div class="project-card" onclick="openProject()">
+      <img src="/Users/sebhamdy/Downloads/tbb-social-mockup-main.jpg" alt="Project 7">
+      <div class="card-info">
+        <div class="card-title">Talent Beyond Boundaries</div>
+        <div class="card-meta">Social Media Design • Instagram • 2024</div>
+      </div>
+    </div>
+
+    <div class="project-card" onclick="openProject()">
+      <img src="/Users/sebhamdy/Downloads/manon-mockup-main.jpg" alt="Project 8">
+      <div class="card-info">
+        <div class="card-title">Manon Gadbois • McGill University</div>
+        <div class="card-meta">Portfolio • 2025</div>
+      </div>
+    </div>
+
+    <div class="project-card" onclick="openProject()">
+      <img src="/Users/sebhamdy/Downloads/lfd-rapport-mockup-main.jpg" alt="Project 10">
+      <div class="card-info">
+        <div class="card-title">Les Fruits Défendus</div>
+        <div class="card-meta">Annual Report Design · 2025</div>
+      </div>
+    </div>
+
+    <div class="project-card" onclick="openProject()">
+      <img src="/Users/sebhamdy/Downloads/mcgill-2026-mockup-main.jpg" alt="Project 9">
+      <div class="card-info">
+        <div class="card-title">Francofête 2026 • McGill University</div>
+        <div class="card-meta">Social Media Design • Instagram • 2026</div>
+      </div>
+    </div>
+    
+
+    <!-- ↑ Add more .project-card blocks here -->
+
+  </div>
+
+  <footer>
+    <span>sebastien.hamdy@hec.ca  •  (438) 496-5128</span><!-- ← change -->
+    <span>© 2026 Sébastien H. Made with ❤️.</span><!-- ← change or remove -->
+  </footer>
+
+</div><!-- /page-main -->
+
+
+<script>
+  function openProject() {
+    const modal = document.getElementById('wip-modal');
+    modal.classList.add('visible');
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('wip-modal');
+    modal.classList.remove('visible');
+  }
+
+  // close if user clicks the dark backdrop
+  document.getElementById('wip-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+</script>
+
+<div class="modal-overlay" id="wip-modal">
+  <div class="modal-box">
+    <div class="modal-title">Coming soon.</div>
+    <p class="modal-text">
+      Project pages are currently being updated.
+    </p>
+    <button class="modal-btn" onclick="closeModal()">OK</button>
+  </div>
+</div>
+
+</body>
+</html>
