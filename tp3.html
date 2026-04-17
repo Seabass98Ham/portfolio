@@ -121,17 +121,19 @@
 
     /* ── HERO IMAGES ── */
     .project-hero-wrap {
-      padding: 2rem 1.5rem 0;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+      padding: 2rem 1.5rem 4rem;
       animation: fadeUp 0.8s 0.2s ease both;
-      margin-bottom: 4rem;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4px;
     }
 
     .project-hero {
       width: 100%;
-      aspect-ratio: 16/9;
+      aspect-ratio: 4/3;
       object-fit: cover;
       display: block;
       background: linear-gradient(135deg, var(--line) 0%, #e8e4de 100%);
@@ -202,7 +204,11 @@
       }
 
       .project-hero-wrap {
-        padding: 3rem 3rem 0;
+        padding: 3rem 3rem 5rem;
+      }
+
+      .project-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
 
       footer {
@@ -232,7 +238,11 @@
       }
 
       .project-hero-wrap {
-        padding: 3rem 4rem 0;
+        padding: 3rem 4rem 6rem;
+      }
+
+      .project-grid {
+        grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
       }
 
       footer {
@@ -264,12 +274,14 @@
   </div>
 
   <div class="project-hero-wrap">
-    <img src="tp3-mockup-main.jpg" alt="TP3 • HEC Montréal — overview" class="project-hero">
-    <img src="tp3-mockup-1.jpg" alt="TP3 • HEC Montréal — slide 1" class="project-hero">
-    <img src="tp3-mockup-2.jpg" alt="TP3 • HEC Montréal — slide 2" class="project-hero">
-    <img src="tp3-mockup-3.jpg" alt="TP3 • HEC Montréal — slide 3" class="project-hero">
-    <img src="tp3-mockup-4.jpg" alt="TP3 • HEC Montréal — slide 4" class="project-hero">
-    <img src="tp3-mockup-6.jpg" alt="TP3 • HEC Montréal — slide 6" class="project-hero">
+    <div class="project-grid">
+      <img src="tp3-mockup-main.jpg" alt="TP3 • HEC Montréal — overview" class="project-hero">
+      <img src="tp3-mockup-1.jpg" alt="TP3 • HEC Montréal — slide 1" class="project-hero">
+      <img src="tp3-mockup-2.jpg" alt="TP3 • HEC Montréal — slide 2" class="project-hero">
+      <img src="tp3-mockup-3.jpg" alt="TP3 • HEC Montréal — slide 3" class="project-hero">
+      <img src="tp3-mockup-4.jpg" alt="TP3 • HEC Montréal — slide 4" class="project-hero">
+      <img src="tp3-mockup-6.jpg" alt="TP3 • HEC Montréal — slide 6" class="project-hero">
+    </div>
   </div>
 
   <button id="backToTop" aria-label="Back to top">
