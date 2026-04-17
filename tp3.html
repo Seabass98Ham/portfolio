@@ -210,7 +210,7 @@
       width: 100%;
       height: 1px;
       background: var(--ink);
-      transition: transform 0.35s ease, opacity 0.35s ease;
+      transition: transform 1s ease, opacity 1s ease;
       transform-origin: center;
     }
 
@@ -258,6 +258,8 @@
     }
 
     .menu-overlay a:hover { color: var(--muted); }
+
+    /* ── Hamburger END ── */
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
@@ -348,12 +350,17 @@
   </header>
 
   <!-- Fullscreen mobile menu -->
+
+  <!-- Hamburger -->
+    
   <div class="menu-overlay" id="menuOverlay">
     <a href="">Photography</a>
     <a href="">About</a>
     <a href="">Contact</a>
     <a href="https://www.linkedin.com/in/s%C3%A9bastien-h-a75829300/">LinkedIn</a>
   </div>
+
+  <!-- Hamburger END -->
 
   <div class="project-intro">
     <a href="index.html" class="back-link">All projects</a>
@@ -390,6 +397,8 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
+    /* <--Hamburger--> */
+
     const hamburger = document.getElementById("hamburger");
     const menuOverlay = document.getElementById("menuOverlay");
 
@@ -406,6 +415,9 @@
         document.body.style.overflow = "";
       });
     });
+
+    /* <--Hamburger END--> */
+    
   </script>
 
 </body>
