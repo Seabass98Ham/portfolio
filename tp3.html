@@ -187,6 +187,76 @@
       background-color: #333;
     }
 
+    /* ── HAMBURGER (mobile only) ── */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 32px;
+      height: 32px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 10001;
+      position: relative;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 1px;
+      background: var(--ink);
+      transition: transform 0.35s ease, opacity 0.35s ease;
+      transform-origin: center;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    @media (min-width: 600px) {
+      .hamburger { display: none; }
+    }
+
+    @media (max-width: 599px) {
+      nav { display: none; }
+    }
+
+    /* ── FULLSCREEN MENU OVERLAY ── */
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      z-index: 10000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    .menu-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .menu-overlay a {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 10vw, 3rem);
+      font-weight: 300;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: color 0.2s;
+    }
+
+    .menu-overlay a:hover { color: var(--muted); }
+
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
@@ -265,7 +335,18 @@
     <nav>
       <a href="https://www.linkedin.com/in/s%C3%A9bastien-h-a75829300/">LinkedIn</a>
     </nav>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </header>
+
+  <!-- Fullscreen mobile menu -->
+  <div class="menu-overlay" id="menuOverlay">
+    <a href="index.html">Work</a>
+    <a href="https://www.linkedin.com/in/s%C3%A9bastien-h-a75829300/">LinkedIn</a>
+  </div>
 
   <div class="project-intro">
     <a href="index.html" class="back-link">All projects</a>
@@ -300,6 +381,23 @@
     });
     btn.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    const hamburger = document.getElementById("hamburger");
+    const menuOverlay = document.getElementById("menuOverlay");
+
+    hamburger.addEventListener("click", () => {
+      const isOpen = menuOverlay.classList.toggle("open");
+      hamburger.classList.toggle("open", isOpen);
+      document.body.style.overflow = isOpen ? "hidden" : "";
+    });
+
+    menuOverlay.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        menuOverlay.classList.remove("open");
+        hamburger.classList.remove("open");
+        document.body.style.overflow = "";
+      });
     });
   </script>
 
