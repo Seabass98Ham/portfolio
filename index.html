@@ -30,7 +30,6 @@
       line-height: 1.7;
     }
 
-
     /* ── MAIN PORTFOLIO PAGE ── */
     #page-main {
       min-height: 100vh;
@@ -40,17 +39,17 @@
 
     /* Header */
     header {
-      padding: 3rem 4rem 2rem;
+      padding: 1.5rem;
       display: flex;
       justify-content: space-between;
-      align-items: flex-end;
+      align-items: center;
       border-bottom: 1px solid var(--line);
       animation: fadeUp 0.8s ease both;
     }
 
     .name {
       font-family: var(--serif);
-      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-size: clamp(1.8rem, 6vw, 4rem);
       font-weight: 300;
       letter-spacing: -0.01em;
       line-height: 1;
@@ -60,7 +59,7 @@
 
     nav {
       display: flex;
-      gap: 2rem;
+      gap: 1.25rem;
       color: var(--muted);
       font-size: 11px;
       letter-spacing: 0.1em;
@@ -76,14 +75,14 @@
 
     /* Hero tagline */
     .tagline {
-      padding: 4rem 4rem 3rem;
+      padding: 2rem 1.5rem;
       max-width: 640px;
       animation: fadeUp 0.8s 0.1s ease both;
     }
 
     .tagline p {
       font-family: var(--serif);
-      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      font-size: clamp(1.05rem, 3.5vw, 1.35rem);
       font-weight: 300;
       color: black;
       line-height: 1.6;
@@ -91,7 +90,7 @@
 
     /* Projects grid */
     .projects-label {
-      padding: 0 4rem 1rem;
+      padding: 0 1.5rem 1rem;
       font-size: 10px;
       letter-spacing: 0.15em;
       text-transform: uppercase;
@@ -100,9 +99,9 @@
     }
 
     .grid {
-      padding: 0 4rem 6rem;
+      padding: 0 1.5rem 4rem;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); /* Ask ChatGTP about this ~ */
+      grid-template-columns: 1fr;
       gap: 4px;
       animation: fadeUp 0.8s 0.2s ease both;
     }
@@ -124,6 +123,16 @@
       opacity: 1;
     }
 
+    /* On touch devices, always show card info since hover doesn't work */
+    @media (hover: none) {
+      .project-card img {
+        opacity: 0.55;
+        transform: scale(1.0);
+      }
+      .card-info { opacity: 1; }
+      .card-arrow { opacity: 1; transform: translate(0, 0); }
+    }
+
     .project-card:hover img {
       opacity: 0.3;
       transform: scale(1.04);
@@ -135,7 +144,7 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 2rem;
+      padding: 1.25rem;
       opacity: 0;
       transition: opacity 0.4s ease;
     }
@@ -144,7 +153,7 @@
 
     .card-title {
       font-family: var(--serif);
-      font-size: 1.7rem;
+      font-size: clamp(1.2rem, 5vw, 1.7rem);
       font-weight: 300;
       font-style: italic;
       color: var(--bg);
@@ -161,10 +170,10 @@
 
     .card-arrow {
       position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
+      top: 1rem;
+      right: 1rem;
       color: var(--bg);
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       opacity: 0;
       transform: translate(-4px, 4px);
       transition: opacity 0.4s, transform 0.4s;
@@ -177,10 +186,11 @@
     /* Footer */
     footer {
       margin-top: auto;
-      padding: 2rem 4rem;
+      padding: 1.5rem;
       border-top: 1px solid var(--line);
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      gap: 0.4rem;
       color: var(--muted);
       font-size: 11px;
     }
@@ -196,11 +206,11 @@
     }
 
     .project-header {
-      padding: 2.5rem 4rem;
+      padding: 1.5rem;
       border-bottom: 1px solid var(--line);
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 1.25rem;
       animation: fadeUp 0.6s ease both;
     }
 
@@ -219,16 +229,16 @@
 
     .project-header-title {
       font-family: var(--serif);
-      font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+      font-size: clamp(1.3rem, 5vw, 2.8rem);
       font-weight: 300;
       font-style: italic;
     }
 
     .project-body {
       display: grid;
-      grid-template-columns: 1fr 320px;
-      gap: 4rem;
-      padding: 4rem;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 2rem 1.5rem;
       animation: fadeUp 0.6s 0.1s ease both;
     }
 
@@ -238,7 +248,6 @@
       object-fit: cover;
       background: var(--line);
       display: block;
-      /* placeholder gradient if no image */
       background-image: linear-gradient(135deg, var(--line) 0%, #e8e4de 100%);
     }
 
@@ -261,11 +270,11 @@
     }
 
     .project-sidebar {
-      padding-top: 0.5rem;
+      padding-top: 0;
     }
 
     .sidebar-section {
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
 
     .sidebar-label {
@@ -283,8 +292,7 @@
     }
 
     .project-description {
-      margin-top: 2.5rem;
-      grid-column: 1;
+      margin-top: 1rem;
     }
 
     .project-description p {
@@ -306,12 +314,77 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 720px) {
-      header, .tagline, .projects-label, .grid, footer,
-      .project-header, .project-body { padding-left: 1.5rem; padding-right: 1.5rem; }
-      .project-body { grid-template-columns: 1fr; }
-      nav { gap: 1rem; }
+    /* ── TABLET & UP ── */
+    @media (min-width: 600px) {
+      header {
+        padding: 2rem 3rem;
+      }
+
+      .tagline {
+        padding: 3rem 3rem 2rem;
+      }
+
+      .projects-label {
+        padding: 0 3rem 1rem;
+      }
+
+      .grid {
+        padding: 0 3rem 5rem;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      footer {
+        padding: 1.5rem 3rem;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .project-header {
+        padding: 2rem 3rem;
+      }
+
+      .project-body {
+        padding: 3rem;
+      }
+    }
+
+    /* ── DESKTOP ── */
+    @media (min-width: 1024px) {
+      header {
+        padding: 3rem 4rem 2rem;
+      }
+
+      .tagline {
+        padding: 4rem 4rem 3rem;
+      }
+
+      .projects-label {
+        padding: 0 4rem 1rem;
+      }
+
+      .grid {
+        padding: 0 4rem 6rem;
+        grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+      }
+
+      footer {
+        padding: 2rem 4rem;
+      }
+
+      .project-header {
+        padding: 2.5rem 4rem;
+        gap: 2rem;
+      }
+
+      .project-body {
+        grid-template-columns: 1fr 320px;
+        gap: 4rem;
+        padding: 4rem;
+      }
+
+      .project-sidebar {
+        padding-top: 0.5rem;
+      }
     }
 
     .active {
@@ -319,99 +392,101 @@
     }
 
     #loader-overlay {
-    position: fixed;
-    inset: 0;
-    background-color: #1a1a2e; /* 🎨 Change this to your color */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    transition: opacity 0.5s ease;
-  }
+      position: fixed;
+      inset: 0;
+      background-color: #1a1a2e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
 
-  #loader-overlay.hidden {
-    opacity: 0;
-    pointer-events: none;
-  }
+    #loader-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
 
-  /* ── CUSTOM MODAL ── */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(26, 24, 20, 0.45);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    z-index: 9999;
-  }
+    /* ── CUSTOM MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 24, 20, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 9999;
+      padding: 1.5rem;
+    }
 
-  .modal-overlay.visible {
-    opacity: 1;
-    pointer-events: all;
-  }
+    .modal-overlay.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
 
-  .modal-box {
-    background: var(--bg);
-    border: 1px solid var(--line);
-    padding: 3rem;
-    max-width: 400px;
-    width: 90%;
-    transform: translateY(16px);
-    transition: transform 0.35s ease, opacity 0.35s ease;
-    opacity: 0;
-  }
+    .modal-box {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      padding: 2rem;
+      max-width: 400px;
+      width: 100%;
+      transform: translateY(16px);
+      transition: transform 0.35s ease, opacity 0.35s ease;
+      opacity: 0;
+    }
 
-  .modal-overlay.visible .modal-box {
-    transform: translateY(0);
-    opacity: 1;
-  }
+    .modal-overlay.visible .modal-box {
+      transform: translateY(0);
+      opacity: 1;
+    }
 
-  .modal-label {
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1rem;
-  }
+    .modal-label {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
 
-  .modal-title {
-    font-family: var(--serif);
-    font-size: 1.6rem;
-    font-weight: 300;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-  }
+    .modal-title {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
 
-  .modal-text {
-    font-family: var(--serif);
-    font-size: 1rem;
-    font-weight: 300;
-    color: #4a4740;
-    line-height: 1.75;
-    margin-bottom: 2rem;
-  }
+    .modal-text {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 300;
+      color: #4a4740;
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
 
-  .modal-btn {
-    background: none;
-    border: 1px solid var(--ink);
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink);
-    padding: 0.75rem 2rem;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-  }
+    .modal-btn {
+      background: none;
+      border: 1px solid var(--ink);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      padding: 0.75rem 2rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      /* Ensure minimum tap target size on mobile */
+      min-height: 44px;
+    }
 
-  .modal-btn:hover {
-    background: var(--ink);
-    color: var(--bg);
-  }
-
+    .modal-btn:hover {
+      background: var(--ink);
+      color: var(--bg);
+    }
   </style>
 </head>
 <body>
@@ -424,16 +499,15 @@
 <div id="page-main">
 
   <header>
-    <a class="name" href="index.html">Sébastien H.</a><!-- ← change this -->
+    <a class="name" href="index.html">Sébastien H.</a>
     <nav>
-      <a href="https://www.linkedin.com/in/s%C3%A9bastien-h-a75829300/">LinkedIn</a><!-- ← go to contact page -->
+      <a href="https://www.linkedin.com/in/s%C3%A9bastien-h-a75829300/">LinkedIn</a>
     </nav>
   </header>
 
   <div class="tagline">
     <p>
       I'm Seb, an MSc student, designer and digital storyteller based in Montreal, Canada. 
-
     </p>
   </div>
 
@@ -441,18 +515,16 @@
 
   <div class="grid">
 
-    <!-- ══ PROJECT CARD — duplicate this block for each project ══ -->
-      <div class="project-card" onclick="openProject()">
-        <!-- Replace src with your image path, e.g. src="images/proj1.jpg" -->
-        <img src="tp3-mockup-main.jpg" alt="Project 1" >
-        <div class="card-info">
-          <div class="card-title">TP3 • HEC Montréal</div><!-- ← change -->
-          <div class="card-meta">System Design • Presentation • 2026</div><!-- ← change -->
-        </div>
+    <div class="project-card" onclick="openProject()">
+      <img src="tp3-mockup-main.jpg" alt="Project 1">
+      <div class="card-info">
+        <div class="card-title">TP3 • HEC Montréal</div>
+        <div class="card-meta">System Design • Presentation • 2026</div>
       </div>
+    </div>
 
     <div class="project-card" onclick="openProject()">
-      <img src="lfd-web-mockup-main.jpg" alt="Project 2" >
+      <img src="lfd-web-mockup-main.jpg" alt="Project 2">
       <div class="card-info">
         <div class="card-title">Les Fruits Défendus</div>
         <div class="card-meta">Mobile Design • UX Design • Prototyping • 2026</div>
@@ -460,7 +532,7 @@
     </div>
 
     <div class="project-card" onclick="openProject()">
-      <img src="mcgill-mockup-main.jpg" alt="Project 3" >
+      <img src="mcgill-mockup-main.jpg" alt="Project 3">
       <div class="card-info">
         <div class="card-title">Francofête 2025 • McGill University</div>
         <div class="card-meta">Social Media Design • Instagram • 2025</div>
@@ -522,15 +594,12 @@
         <div class="card-meta">Social Media Design • Instagram • 2026</div>
       </div>
     </div>
-    
-
-    <!-- ↑ Add more .project-card blocks here -->
 
   </div>
 
   <footer>
-    <span>sebastien.hamdy@hec.ca  •  (438) 496-5128</span><!-- ← change -->
-    <span>© 2026 Sébastien H. Made with ❤️.</span><!-- ← change or remove -->
+    <span>sebastien.hamdy@hec.ca  •  (438) 496-5128</span>
+    <span>© 2026 Sébastien H. Made with ❤️.</span>
   </footer>
 
 </div><!-- /page-main -->
@@ -547,7 +616,6 @@
     modal.classList.remove('visible');
   }
 
-  // close if user clicks the dark backdrop
   document.getElementById('wip-modal').addEventListener('click', function(e) {
     if (e.target === this) closeModal();
   });
