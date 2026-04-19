@@ -189,13 +189,121 @@
     footer a { color: var(--muted); text-decoration: none; }
     footer a:hover { color: var(--ink); }
 
+    /* ── BACK TO TOP ── */
+    
+    #backToTop {
+      position: fixed;
+      bottom: 2rem;
+      right: 1.5rem;
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 50%;
+      background-color: var(--ink);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.2s;
+    }
+
+    #backToTop.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    #backToTop:hover {
+      transform: translateY(-2px);
+      background-color: #333;
+    }
+    
+    /* ── HAMBURGER ── */
+    
+    hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 32px;
+      height: 32px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 10001;
+      position: relative;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 1px;
+      background: var(--ink);
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      transform-origin: center;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    @media (min-width: 600px) {
+      .hamburger { display: none; }
+    }
+
+    @media (max-width: 599px) {
+      nav { display: none; }
+    }
+
+    /* ── FULLSCREEN MENU OVERLAY ── */
+    
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      z-index: 10000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    .menu-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .menu-overlay a {
+      font-family: var(--serif);
+      font-size: clamp(1rem, 6.5vw, 2rem);
+      font-weight: 300;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: color 0.2s;
+    }
+
+    .menu-overlay a:hover { color: var(--muted); }
+
     /* ── ANIMATIONS ── */
+    
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
     /* ── TABLET & UP ── */
+    
     @media (min-width: 600px) {
       header {
         padding: 2rem 3rem;
@@ -283,6 +391,15 @@
       .project-sidebar {
         padding-top: 0.5rem;
       }
+
+      #backToTop {
+        bottom: 3rem;
+        right: 3rem;
+        width: 56px;
+        height: 56px;
+
+      }
+      
     }
 
     .active {
@@ -381,13 +498,23 @@
 <div id="page-main">
 
   <header>
-    <a class="name" href="index.html">Sébastien H.</a>
+    <a class="name" href="https://sebastienhamdy.ca/">Sébastien H.</a>
     <nav>
       <a href="https://sebastienhamdy/about/">About</a>
-      <a href="https://sebastienhamdy/about/">Contact</a>
+      <a href="https://sebastienhamdy/contact/">Contact</a>
       <a href="https://www.linkedin.com/in/s%C3%A9bastien-h-a75829300/">LinkedIn</a>
     </nav>
   </header>
+
+  <!-- Hamburger -->
+    
+  <div class="menu-overlay" id="menuOverlay">
+    <a href="https://sebastienhamdy.ca/about/">About</a>
+    <a href="https://sebastienhamdy.ca/contact/">Contact</a>
+    <a href="https://www.linkedin.com/in/s%C3%A9bastien-h-a75829300/">LinkedIn</a>
+  </div>
+
+  <!-- Hamburger END -->
 
   <div class="tagline">
     <p>
@@ -501,6 +628,10 @@
 
   </div>
 
+  <button id="backToTop" aria-label="Back to top">
+    <span class="material-icons">arrow_upward</span>
+  </button>
+
   <footer>
     <span>sebastien.hamdy@hec.ca  •  (438) 496-5128</span>
     <span>© 2026 Sébastien H. Made with ❤️.</span>
@@ -510,10 +641,34 @@
 
 
 <script>
-  function openProject() {
-    const modal = document.getElementById('wip-modal');
-    modal.classList.add('visible');
-  }
+  const btn = document.getElementById("backToTop");
+    window.addEventListener("scroll", () => {
+      btn.classList.toggle("show", document.documentElement.scrollTop > 200);
+    });
+    btn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+  /* <--Hamburger--> */
+
+    const hamburger = document.getElementById("hamburger");
+    const menuOverlay = document.getElementById("menuOverlay");
+
+    hamburger.addEventListener("click", () => {
+      const isOpen = menuOverlay.classList.toggle("open");
+      hamburger.classList.toggle("open", isOpen);
+      document.body.style.overflow = isOpen ? "hidden" : "";
+    });
+
+    menuOverlay.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        menuOverlay.classList.remove("open");
+        hamburger.classList.remove("open");
+        document.body.style.overflow = "";
+      });
+    });
+
+  /* <--Hamburger END--> */
 
   function closeModal() {
     const modal = document.getElementById('wip-modal');
