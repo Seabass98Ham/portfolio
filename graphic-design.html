@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Graphic Design — Sébastien Hamdy</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      /* Default background behind each image (shows through transparent PNGs).
+         Change it here for all images, or override per image with style="--bg: #hex". */
+      --tile-bg: #f1f1f1;
+
+      /* Inner padding around each image inside its tile. Set to 0 for edge-to-edge. */
+      --tile-padding: 0px;
+
+      /* Space between tiles. */
+      --gap: 24px;
+    }
+
+    html {
+      font-family: "Avenir", sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #111;
+      background: #fff;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 40px;
+      font-size: 0.9rem;
+    }
+
+    header .name {
+      letter-spacing: 0.15rem;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    nav a,
+    header .name {
+      transition: opacity 0.2s ease;
+    }
+
+    nav a:hover,
+    header .name:hover {
+      opacity: 0.5;
+    }
+
+    nav a[aria-current="page"] {
+      text-decoration: underline;
+      text-underline-offset: 6px;
+      text-decoration-thickness: 1px;
+    }
+
+    /* Gallery */
+    main {
+      flex: 1;
+      padding: 24px 40px 80px;
+    }
+
+    /* Masonry layout: columns fill top to bottom, images keep their own aspect ratio */
+    .gallery {
+      column-count: 3;
+      column-gap: var(--gap);
+    }
+
+    .tile {
+      break-inside: avoid;
+      margin-bottom: var(--gap);
+      padding: var(--tile-padding);
+      background: var(--bg, var(--tile-bg));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+    }
+
+    .tile img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    /* Footer */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 40px;
+      font-size: 0.8rem;
+      color: #777;
+    }
+
+    footer a {
+      transition: opacity 0.2s ease;
+    }
+
+    footer a:hover {
+      opacity: 0.5;
+    }
+
+    @media (max-width: 1000px) {
+      .gallery {
+        column-count: 2;
+      }
+    }
+
+    @media (max-width: 600px) {
+      :root {
+        --tile-padding: 20px;
+        --gap: 16px;
+      }
+
+      header,
+      footer {
+        padding: 24px;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      nav ul {
+        gap: 20px;
+      }
+
+      main {
+        padding: 8px 24px 64px;
+      }
+
+      .gallery {
+        column-count: 1;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="name">SÉBASTIEN HAMDY</a>
+    <nav>
+      <ul>
+        <li><a href="graphic-design.html" aria-current="page">graphic design</a></li>
+        <li><a href="photography.html">photography</a></li>
+        <li><a href="art.html">art</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="gallery">
+
+      <!-- To add a project: copy a <figure> block, change the image path and alt text.
+           To change a tile's background: edit the --bg value in its style attribute.
+           Remove style="..." entirely to use the default (--tile-bg at the top of the CSS). -->
+
+      <figure class="tile" style="--bg: #f1f1f1;">
+        <img src="portfolio_1.webp" alt="Project 01 mockup" loading="lazy">
+      </figure>
+
+      <figure class="tile" style="--bg: #e8e4dc;">
+        <img src="portfolio_2.webp" alt="Project 02 mockup" loading="lazy">
+      </figure>
+
+      <figure class="tile" style="--bg: #ece3d8;">
+        <img src="portfolio_13.webp" alt="Project 06 mockup" loading="lazy">
+      </figure>
+
+      <figure class="tile" style="--bg: #ece3d8;">
+        <img src="portfolio_8.webp" alt="Project 06 mockup" loading="lazy">
+      </figure>
+
+      <figure class="tile" style="--bg: #ece3d8;">
+        <img src="portfolio_14.webp" alt="Project 06 mockup" loading="lazy">
+      </figure>
+
+      <figure class="tile" style="--bg: #f1f1f1;">
+        <img src="portfolio_4.webp" alt="Project 04 mockup" loading="lazy">
+      </figure>
+
+      <figure class="tile" style="--bg: #2b2b2b;">
+        <img src="portfolio_5.webp" alt="Project 05 mockup" loading="lazy">
+      </figure>
+
+      <figure class="tile" style="--bg: #ece3d8;">
+        <img src="portfolio_6.webp" alt="Project 06 mockup" loading="lazy">
+      </figure>
+
+      <figure class="tile" style="--bg: #ece3d8;">
+        <img src="portfolio_7.webp" alt="Project 06 mockup" loading="lazy">
+      </figure>
+
+      <figure class="tile" style="--bg: #dfe6ea;">
+        <img src="portfolio_3.webp" alt="Project 03 mockup" loading="lazy">
+      </figure>
+
+      <figure class="tile" style="--bg: #ece3d8;">
+        <img src="portfolio_12.webp" alt="Project 06 mockup" loading="lazy">
+      </figure>
+
+      <figure class="tile" style="--bg: #ece3d8;">
+        <img src="portfolio_9.webp" alt="Project 06 mockup" loading="lazy">
+      </figure>
+
+    </section>
+  </main>
+
+  <footer>
+    <span>made with &hearts;</span>
+    <a href="https://www.linkedin.com/in/s%C3%A9bastien-h-a75829300/">linkedin</a>
+  </footer>
+
+</body>
+</html>
