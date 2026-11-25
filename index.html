@@ -340,7 +340,7 @@
   <script>
     // Logs visits that arrive with a ?utm_source=... tag (e.g. from the CV) to a Google Sheet via Apps Script.
     (function () {
-      var ENDPOINT = 'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
+      var ENDPOINT = 'https://script.google.com/macros/s/AKfycbxSdLWtTbbtnyUEw7WISwD7emPICLFnQ0bBYqsTAvb3REK6FbtPbnPmxjka1a2wfLg/exec';
       if (ENDPOINT.indexOf('https://') !== 0) return;
 
       var params = new URLSearchParams(window.location.search);
