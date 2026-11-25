@@ -4,6 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Art — Sébastien Hamdy</title>
+  <meta name="description" content="Drawings and illustrations by Sébastien Hamdy. Vectorized versions of the artwork are coming soon.">
+  <meta name="author" content="Sébastien Hamdy">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="canonical" href="https://sebastienhamdy.ca/art.html">
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Sébastien Hamdy">
+  <meta property="og:title" content="Art — Sébastien Hamdy">
+  <meta property="og:description" content="Drawings and illustrations by Sébastien Hamdy. Vectorized versions of the artwork are coming soon.">
+  <meta property="og:url" content="https://sebastienhamdy.ca/art.html">
+  <meta property="og:image" content="https://sebastienhamdy.ca/profile.jpeg">
+  <meta property="og:image:alt" content="Portrait of Sébastien Hamdy">
+  <meta property="og:locale" content="en_CA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Art — Sébastien Hamdy">
+  <meta name="twitter:description" content="Drawings and illustrations by Sébastien Hamdy. Vectorized versions of the artwork are coming soon.">
+  <meta name="twitter:image" content="https://sebastienhamdy.ca/profile.jpeg">
   <style>
     *,
     *::before,
@@ -60,6 +79,52 @@
     nav a:hover,
     header .name:hover {
       opacity: 0.5;
+    }
+
+    /* Menu toggle + close buttons (only shown on mobile) */
+    .menu-toggle,
+    .menu-close {
+      display: none;
+      background: none;
+      border: 0;
+      padding: 8px;
+      margin: -8px;
+      color: inherit;
+      cursor: pointer;
+      line-height: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .menu-toggle:hover,
+    .menu-close:hover {
+      opacity: 0.5;
+    }
+
+    .menu-toggle:focus-visible,
+    .menu-close:focus-visible,
+    nav a:focus-visible,
+    .name:focus-visible {
+      outline: 2px solid #111;
+      outline-offset: 4px;
+    }
+
+    .menu-toggle svg,
+    .menu-close svg {
+      width: 26px;
+      height: 26px;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      fill: none;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
     }
 
     /* Main */
@@ -132,19 +197,49 @@
       }
 
       header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
+        align-items: center;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      /* Full-screen white overlay menu */
+      nav {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+      }
+
+      nav.is-open {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.25s ease, visibility 0s;
+      }
+
+      .menu-close {
+        display: block;
+        position: absolute;
+        top: 32px;
+        right: 32px;
       }
 
       nav ul {
-        gap: 20px;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+        font-size: 1.5rem;
       }
 
-      footer {
-        flex-direction: column;
-        gap: 8px;
-        text-align: center;
+      body.menu-open {
+        overflow: hidden;
       }
     }
   </style>
@@ -153,11 +248,19 @@
 
   <header>
     <a href="index.html" class="name">SÉBASTIEN HAMDY</a>
-    <nav>
+
+    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+    </button>
+
+    <nav id="site-nav" aria-label="Main">
+      <button class="menu-close" type="button" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
       <ul>
         <li><a href="graphic-design.html">graphic design</a></li>
         <li><a href="photography.html">photography</a></li>
-        <li><a href="art.html">art</a></li>
+        <li><a href="art.html" aria-current="page">art</a></li>
       </ul>
     </nav>
   </header>
@@ -173,8 +276,37 @@
 
   <footer>
     <span>made with &hearts;</span>
-    <a href="https://www.linkedin.com/in/s%C3%A9bastien-h-a75829300/">linkedin</a>
+    <a href="https://www.linkedin.com/in/s%C3%A9bastien-h-a75829300/" rel="noopener" target="_blank">linkedin</a>
   </footer>
+
+  <script>
+    (function () {
+      var toggle = document.querySelector('.menu-toggle');
+      var close = document.querySelector('.menu-close');
+      var nav = document.getElementById('site-nav');
+      if (!toggle || !close || !nav) return;
+
+      function setOpen(open) {
+        nav.classList.toggle('is-open', open);
+        document.body.classList.toggle('menu-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        (open ? close : toggle).focus();
+      }
+
+      toggle.addEventListener('click', function () { setOpen(true); });
+      close.addEventListener('click', function () { setOpen(false); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('is-open')) setOpen(false);
+      });
+      // Close the overlay when a link is tapped (e.g. same-page link) or the viewport grows past mobile
+      nav.addEventListener('click', function (e) {
+        if (e.target.closest('a')) setOpen(false);
+      });
+      window.matchMedia('(min-width: 601px)').addEventListener('change', function (e) {
+        if (e.matches && nav.classList.contains('is-open')) setOpen(false);
+      });
+    })();
+  </script>
 
 </body>
 </html>

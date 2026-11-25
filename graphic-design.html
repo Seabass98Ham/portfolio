@@ -4,6 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Graphic Design — Sébastien Hamdy</title>
+  <meta name="description" content="Selected graphic design and branding projects by Sébastien Hamdy, including mockups and volunteer work for local non-profits.">
+  <meta name="author" content="Sébastien Hamdy">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="canonical" href="https://sebastienhamdy.ca/graphic-design.html">
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Sébastien Hamdy">
+  <meta property="og:title" content="Graphic Design — Sébastien Hamdy">
+  <meta property="og:description" content="Selected graphic design and branding projects by Sébastien Hamdy, including mockups and volunteer work for local non-profits.">
+  <meta property="og:url" content="https://sebastienhamdy.ca/graphic-design.html">
+  <meta property="og:image" content="https://sebastienhamdy.ca/profile.jpeg">
+  <meta property="og:image:alt" content="Portrait of Sébastien Hamdy">
+  <meta property="og:locale" content="en_CA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Graphic Design — Sébastien Hamdy">
+  <meta name="twitter:description" content="Selected graphic design and branding projects by Sébastien Hamdy, including mockups and volunteer work for local non-profits.">
+  <meta name="twitter:image" content="https://sebastienhamdy.ca/profile.jpeg">
   <style>
     *,
     *::before,
@@ -77,6 +96,52 @@
       text-decoration: underline;
       text-underline-offset: 6px;
       text-decoration-thickness: 1px;
+    }
+
+    /* Menu toggle + close buttons (only shown on mobile) */
+    .menu-toggle,
+    .menu-close {
+      display: none;
+      background: none;
+      border: 0;
+      padding: 8px;
+      margin: -8px;
+      color: inherit;
+      cursor: pointer;
+      line-height: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .menu-toggle:hover,
+    .menu-close:hover {
+      opacity: 0.5;
+    }
+
+    .menu-toggle:focus-visible,
+    .menu-close:focus-visible,
+    nav a:focus-visible,
+    .name:focus-visible {
+      outline: 2px solid #111;
+      outline-offset: 4px;
+    }
+
+    .menu-toggle svg,
+    .menu-close svg {
+      width: 26px;
+      height: 26px;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      fill: none;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
     }
 
     /* Gallery */
@@ -155,13 +220,49 @@
       }
 
       header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
+        align-items: center;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      /* Full-screen white overlay menu */
+      nav {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+      }
+
+      nav.is-open {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.25s ease, visibility 0s;
+      }
+
+      .menu-close {
+        display: block;
+        position: absolute;
+        top: 32px;
+        right: 32px;
       }
 
       nav ul {
-        gap: 20px;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+        font-size: 1.5rem;
+      }
+
+      body.menu-open {
+        overflow: hidden;
       }
 
       main {
@@ -171,12 +272,6 @@
       .gallery {
         column-count: 1;
       }
-
-      footer {
-        flex-direction: column;
-        gap: 8px;
-        text-align: center;
-      }
     }
   </style>
 </head>
@@ -184,7 +279,15 @@
 
   <header>
     <a href="index.html" class="name">SÉBASTIEN HAMDY</a>
-    <nav>
+
+    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+    </button>
+
+    <nav id="site-nav" aria-label="Main">
+      <button class="menu-close" type="button" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
       <ul>
         <li><a href="graphic-design.html" aria-current="page">graphic design</a></li>
         <li><a href="photography.html">photography</a></li>
@@ -194,6 +297,7 @@
   </header>
 
   <main>
+    <h1 class="visually-hidden">Graphic design projects by Sébastien Hamdy</h1>
     <section class="gallery">
 
       <!-- To add a project: copy a <figure> block, change the image path and alt text.
@@ -201,51 +305,51 @@
            Remove style="..." entirely to use the default (--tile-bg at the top of the CSS). -->
 
       <figure class="tile" style="--bg: #f1f1f1;">
-        <img src="portfolio_1.webp" alt="Project 01 mockup" loading="lazy">
+        <img src="portfolio_1.webp" alt="Graphic design project 1 by Sébastien Hamdy" width="1920" height="1080" decoding="async" fetchpriority="high">
       </figure>
 
       <figure class="tile" style="--bg: #e8e4dc;">
-        <img src="portfolio_2.webp" alt="Project 02 mockup" loading="lazy">
+        <img src="portfolio_2.webp" alt="Graphic design project 2 by Sébastien Hamdy" width="1920" height="1080" decoding="async">
       </figure>
 
       <figure class="tile" style="--bg: #ece3d8;">
-        <img src="portfolio_13.webp" alt="Project 06 mockup" loading="lazy">
+        <img src="portfolio_13.webp" alt="Graphic design project 3 by Sébastien Hamdy" width="1920" height="1080" decoding="async">
       </figure>
 
       <figure class="tile" style="--bg: #ece3d8;">
-        <img src="portfolio_8.webp" alt="Project 06 mockup" loading="lazy">
+        <img src="portfolio_8.webp" alt="Graphic design project 4 by Sébastien Hamdy" width="1920" height="1080" decoding="async" loading="lazy">
       </figure>
 
       <figure class="tile" style="--bg: #ece3d8;">
-        <img src="portfolio_14.webp" alt="Project 06 mockup" loading="lazy">
+        <img src="portfolio_14.webp" alt="Graphic design project 5 by Sébastien Hamdy" width="1920" height="1080" decoding="async" loading="lazy">
       </figure>
 
       <figure class="tile" style="--bg: #f1f1f1;">
-        <img src="portfolio_4.webp" alt="Project 04 mockup" loading="lazy">
+        <img src="portfolio_4.webp" alt="Graphic design project 6 by Sébastien Hamdy" width="1920" height="1080" decoding="async" loading="lazy">
       </figure>
 
       <figure class="tile" style="--bg: #2b2b2b;">
-        <img src="portfolio_5.webp" alt="Project 05 mockup" loading="lazy">
+        <img src="portfolio_5.webp" alt="Graphic design project 7 by Sébastien Hamdy" width="1920" height="1080" decoding="async" loading="lazy">
       </figure>
 
       <figure class="tile" style="--bg: #ece3d8;">
-        <img src="portfolio_6.webp" alt="Project 06 mockup" loading="lazy">
+        <img src="portfolio_6.webp" alt="Graphic design project 8 by Sébastien Hamdy" width="1920" height="1080" decoding="async" loading="lazy">
       </figure>
 
       <figure class="tile" style="--bg: #ece3d8;">
-        <img src="portfolio_7.webp" alt="Project 06 mockup" loading="lazy">
+        <img src="portfolio_7.webp" alt="Graphic design project 9 by Sébastien Hamdy" width="1920" height="1080" decoding="async" loading="lazy">
       </figure>
 
       <figure class="tile" style="--bg: #dfe6ea;">
-        <img src="portfolio_3.webp" alt="Project 03 mockup" loading="lazy">
+        <img src="portfolio_3.webp" alt="Graphic design project 10 by Sébastien Hamdy" width="1920" height="1080" decoding="async" loading="lazy">
       </figure>
 
       <figure class="tile" style="--bg: #ece3d8;">
-        <img src="portfolio_12.webp" alt="Project 06 mockup" loading="lazy">
+        <img src="portfolio_12.webp" alt="Graphic design project 11 by Sébastien Hamdy" width="1920" height="1080" decoding="async" loading="lazy">
       </figure>
 
       <figure class="tile" style="--bg: #ece3d8;">
-        <img src="portfolio_9.webp" alt="Project 06 mockup" loading="lazy">
+        <img src="portfolio_9.webp" alt="Graphic design project 12 by Sébastien Hamdy" width="1920" height="1080" decoding="async" loading="lazy">
       </figure>
 
     </section>
@@ -253,8 +357,37 @@
 
   <footer>
     <span>made with &hearts;</span>
-    <a href="https://www.linkedin.com/in/s%C3%A9bastien-h-a75829300/">linkedin</a>
+    <a href="https://www.linkedin.com/in/s%C3%A9bastien-h-a75829300/" rel="noopener" target="_blank">linkedin</a>
   </footer>
+
+  <script>
+    (function () {
+      var toggle = document.querySelector('.menu-toggle');
+      var close = document.querySelector('.menu-close');
+      var nav = document.getElementById('site-nav');
+      if (!toggle || !close || !nav) return;
+
+      function setOpen(open) {
+        nav.classList.toggle('is-open', open);
+        document.body.classList.toggle('menu-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        (open ? close : toggle).focus();
+      }
+
+      toggle.addEventListener('click', function () { setOpen(true); });
+      close.addEventListener('click', function () { setOpen(false); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('is-open')) setOpen(false);
+      });
+      // Close the overlay when a link is tapped (e.g. same-page link) or the viewport grows past mobile
+      nav.addEventListener('click', function (e) {
+        if (e.target.closest('a')) setOpen(false);
+      });
+      window.matchMedia('(min-width: 601px)').addEventListener('change', function (e) {
+        if (e.matches && nav.classList.contains('is-open')) setOpen(false);
+      });
+    })();
+  </script>
 
 </body>
 </html>
